@@ -1,11 +1,8 @@
 /*
 半点京豆雨
-更新时间：2021-12-8
+更新时间：2022-1-11
 脚本兼容: Quantumult X, Surge, Loon, JSBox, Node.js
-by：msechen
-github:https://github.com/msechen/jdrain
-频道:https://t.me/jdredrain
-交流群组：https://t.me/+xfWwiMAFonwzZDFl
+by：msechen 感谢小手大佬修改接口
 ==============Quantumult X==============
 [task_local]
 #半点京豆雨
@@ -77,7 +74,6 @@ const JD_API_HOST = 'https://api.m.jd.com/api';
           }
           continue
         }
-        // await receiveRedRain(id);
         await queryRedRainTemplateNew(id)
       }
     }
@@ -170,39 +166,6 @@ function doInteractiveAssignment(encryptProjectId, encryptAssignmentId) {
     })
   })
 }
-
-// function receiveRedRain(actId) {
-//   return new Promise(resolve => {
-//     const body = { actId };
-//     $.get(taskUrl('noahRedRainLottery', body), (err, resp, data) => {
-//       try {
-//         if (err) {
-//           console.log(`${JSON.stringify(err)}`)
-//           console.log(`${$.name} API请求失败，请检查网路重试`)
-//         } else {
-//           if (safeGet(data)) {
-//             data = JSON.parse(data);
-//             if (data.subCode === '0') {
-//               console.log(`领取成功，获得${JSON.stringify(data.lotteryResult)}`)
-//               // message+= `领取成功，获得${JSON.stringify(data.lotteryResult)}\n`
-//               message += `领取成功，获得 ${(data.lotteryResult.jPeasList[0].quantity)}京豆`
-//               allMessage += `京东账号${$.index}${$.nickName || $.UserName}\n领取成功，获得 ${(data.lotteryResult.jPeasList[0].quantity)}京豆${$.index !== cookiesArr.length ? '\n\n' : ''}`;
-//             } else if (data.subCode === '8') {
-//               console.log(`领取失败：本场已领过`)
-//               message += `领取失败，本场已领过`;
-//             } else {
-//               console.log(`返回信息：${JSON.stringify(data)}`)
-//             }
-//           }
-//         }
-//       } catch (e) {
-//         $.logErr(e, resp)
-//       } finally {
-//         resolve();
-//       }
-//     })
-//   })
-// }
 
 
 function taskUrl(function_id, body = {}) {
