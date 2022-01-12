@@ -67,9 +67,8 @@ if ($.isNode()) {
     if ($.isNode()) await notify.sendNotify($.name, allMessage);
     $.msg($.name, '', allMessage)
   }
-  let res = await getAuthorShareCode('http://adguard.ipq.co/wish.json')
+  let res = await getAuthorShareCode('https://raw.githubusercontent.com/msechen/shareCodes/main/wish.json')
   if (!res) {
-    $.http.get({url: 'http://adguard.ipq.co/wish.json'}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
     await $.wait(1000)
     res = await getAuthorShareCode('http://adguard.ipq.co/wish.json')
   }
@@ -78,7 +77,7 @@ if ($.isNode()) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
-      console.log(`开始内部助力\n`)
+      console.log(`【京东账号${$.index}】${$.nickName || $.UserName}开始内部助力\n`)
       for (let v = 0; v < appIdArr.length; v++) {
         $.canHelp = true
         appId = appIdArr[v]
