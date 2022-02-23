@@ -3,7 +3,13 @@
 更新时间：2022-1-24
 脚本兼容: Quantumult X, Surge, Loon, JSBox, Node.js
 by：msechen
+<<<<<<< HEAD
 整点京豆雨更新频道：https://t.me/jdrain
+=======
+github:https://github.com/msechen/jdrain
+频道:https://t.me/jdredrain
+交流群组：https://t.me/+xfWwiMAFonwzZDFl
+>>>>>>> 69e2454bc59e9c82e511b6f469b90a55e18e21fd
 ==============Quantumult X==============
 [task_local]
 #整点京豆雨
@@ -173,10 +179,17 @@ function doInteractiveAssignment(encryptProjectId, encryptAssignmentId) {
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
+<<<<<<< HEAD
             console.log(data);
             if (data.subCode == "0") {
               console.log(`${data.rewardsInfo.successRewards[3][0].quantity}京豆`);
               allMessage += `京东账号${$.index}${$.nickName || $.UserName}\n领取成功，获得【${data.rewardsInfo.successRewards[3][0].quantity}】京豆${$.index !== cookiesArr.length ? '\n\n' : ''}`;
+=======
+            if (data.subCode == "0") {
+              //console.log(`${data.rewardsInfo.successRewards[3][0].rewardName}`);
+              message += `领取成功，获得 ${data.rewardsInfo.successRewards[3][0].rewardName}`
+              allMessage += `京东账号${$.index}${$.nickName || $.UserName}\n领取成功，获得 ${data.rewardsInfo.successRewards[3][0].rewardName}${$.index !== cookiesArr.length ? '\n\n' : ''}`;
+>>>>>>> 69e2454bc59e9c82e511b6f469b90a55e18e21fd
             } else {
               console.log(data);
             }
