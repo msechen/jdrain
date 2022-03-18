@@ -1,4 +1,4 @@
-甘露殿监控脚本仓库，请将脚本放置在/jd/own/raw文件夹
+甘露殿监控脚本仓库，请将脚本放置在/jd/own/raw文件夹，依赖文件magic.js放在/jd/scripts文件夹
 
 user.py为监控文件，库 https://github.com/msechen/jdv5 安装v4+bot+diybot， 登录原版user.py后
 
