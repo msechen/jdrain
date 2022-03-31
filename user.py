@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 
@@ -35,7 +35,7 @@ async def user(event):
         logger.error(f"错误--->{str(e)}")
 
 
-@client.on(events.NewMessage(chats=[-1001728533280, bot_id, myzdjr_chatIds], pattern=r'export\s(computer_activityId|comm_activityIDList|jd_mhurlList|jd_nzmhurl|wish_appIdArrList|jd_redrain_half_url|jd_redrain_url|M_WX_COLLECT_CARD_URL|jd_cjhy_activityId|jd_zdjr_activityId).*=(".*"|\'.*\')'))
+@client.on(events.NewMessage(chats=[-1001728533280, bot_id, myzdjr_chatIds], pattern=r'export\s(computer_activityId|comm_activityIDList|jd_mhurlList|jd_nzmhurl|wish_appIdArrList|jd_redrain_half_url|jd_redrain_url|M_WX_COLLECT_CARD_URL|jd_cjhy_activityId|jd_zdjr_activityId|VENDER_ID).*=(".*"|\'.*\')'))
 async def activityID(event):
     try:
         text = event.message.text
@@ -59,6 +59,8 @@ async def activityID(event):
             name = "cj组队瓜分"
         elif "jd_zdjr_activityId" in text:
             name = "lz组队瓜分"
+        elif "VENDER_ID" in text:
+            name = "入会开卡领豆"
         else:
             return
         msg = await jdbot.send_message(chat_id, f'【监控】 监测到`{name}` 环境变量！')
@@ -112,6 +114,8 @@ async def activityID(event):
                 await cmd('otask /jd/own/raw/jd_cjzdgf.js now')
             elif "jd_zdjr_activityId" in event.message.text:
                 await cmd('otask /jd/own/raw/jd_zdjr.js now')
+            elif "jd_zdjr_activityId" in event.message.text:
+                await cmd('otask /jd/own/raw/jd_OpenCard_Force.js now')
             elif "jd_redrain_url" in event.message.text:
                 msg = await jdbot.send_message(chat_id, r'`更换整点雨url完毕\n请定时任务0 0 * * * jtask jd_redrain now')
                 await asyncio.sleep(1)
