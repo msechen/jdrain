@@ -1,12 +1,16 @@
 /*
-许愿池通用抽奖机脚本
+甘露殿-https://t.me/jdredrain
+
+自动车监控脚本-众筹许愿池
+https://raw.githubusercontent.com/msechen/jdrain/main/jd_wish.js
+
 #许愿池抽奖机任务，自行加入以下环境变量，多个ID用@连接
 export wish_appIdArrList="1E1NXxq0@1FFVQyqw@1F11Vx64"               
 export wish_appNameArrList="众筹许愿池@1111点心动@冰雪闪耀季"
 
 cron请根据活动对应的规则设置
  */
-const $ = new Env('众筹许愿池');
+const $ = new Env('自动车-众筹许愿池');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
@@ -37,6 +41,7 @@ if ($.isNode()) {
   }
   let appIdArr = appIdArrList.split("@");
   let appNameArr = appNameArrList.split("@");
+  console.log(`\n甘露殿【https://t.me/jdredrain】提醒你:许愿池抽奖任务ID就位，准备开始薅豆`);
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
@@ -63,14 +68,10 @@ if ($.isNode()) {
       }
     }
   }
-  if (allMessage) {
-    if ($.isNode()) await notify.sendNotify($.name, allMessage);
-    $.msg($.name, '', allMessage)
-  }
-  let res = await getAuthorShareCode('https://raw.githubusercontent.com/msechen/shareCodes/main/wish.json')
+  let res = await getAuthorShareCode('https://gitee.com/msewb/update/raw/master/wish.json')
   if (!res) {
     await $.wait(1000)
-    res = await getAuthorShareCode('http://adguard.ipq.co/wish.json')
+    res = await getAuthorShareCode('https://gitee.com/msewb/update/raw/master/wish.json')
   }
   $.shareCode = [...$.shareCode, ...(res || [])]
   for (let i = 0; i < cookiesArr.length; i++) {
@@ -102,6 +103,10 @@ if ($.isNode()) {
         }
       }
     }
+  }
+  if (allMessage) {
+    if ($.isNode()) await notify.sendNotify(`${$.name}`, `${allMessage}\n甘露殿【https://t.me/jdredrain】`);
+    $.msg($.name, '', allMessage)
   }
 })()
     .catch((e) => {

@@ -1,11 +1,16 @@
 /*
+甘露殿-https://t.me/jdredrain
+
+自动车监控脚本-盲盒任务抽京豆
+https://raw.githubusercontent.com/msechen/jdrain/main/jd_mhtask.js
+
 #盲盒任务抽京豆，自行加入以下环境变量，多个活动用@连接
 export jd_mhurlList=""
 
 即时任务，无需cron
  */
 
-const $ = new Env('盲盒任务抽京豆');
+const $ = new Env('自动车-盲盒任务抽京豆');
 const notify = $.isNode() ? require('./sendNotify') : '';
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
@@ -29,7 +34,7 @@ if ($.isNode()) {
     return;
   }
   if (!jd_mhurlList) {
-    $.log(`暂时没有盲盒任务，改日再来～`);
+    $.log(`\n甘露殿【https://t.me/jdredrain】提醒你:暂时没有盲盒任务，改日再来～`);
     return;
   }
   for (let i = 0; i < cookiesArr.length; i++) {
@@ -53,7 +58,7 @@ if ($.isNode()) {
       let jd_mhurlArr = jd_mhurlList.split("@");
       for (let j = 0; j < jd_mhurlArr.length; j++) {
       jd_mhurl = jd_mhurlArr[j]
-      console.log(`新的盲盒任务已经准备好: ${jd_mhurl}，准备开始薅豆`);
+      console.log(`\n甘露殿【https://t.me/jdredrain】提醒你:新的盲盒任务已经准备好: ${jd_mhurl}，准备开始薅豆`);
         try {
         await jdMh(jd_mhurl)
         } catch (e) {
@@ -63,7 +68,7 @@ if ($.isNode()) {
     }
   }
   if (allMessage) {
-    if ($.isNode()) await notify.sendNotify(`${$.name}`, `${allMessage}`);
+    if ($.isNode()) await notify.sendNotify(`${$.name}`, `${allMessage}\n甘露殿【https://t.me/jdredrain】`);
     $.msg($.name, '', allMessage);
     }
 })()

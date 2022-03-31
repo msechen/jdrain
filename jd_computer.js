@@ -1,11 +1,16 @@
 /*
+甘露殿-https://t.me/jdredrain
+
+自动车监控脚本-电脑配件
+https://raw.githubusercontent.com/msechen/jdrain/main/jd_computer.js
+
 #电脑配件ID任务jd_computer,自行加入以下环境变量，多个ID用@连接
 export computer_activityId="16"  
 
 即时任务，无需cron
 */
 
-const $ = new Env('电脑配件');
+const $ = new Env('自动车-电脑配件');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -37,7 +42,7 @@ $.outFlag = 0
     return;
   }
   if (!activityIdList) {
-    $.log(`没有电脑配件ID，改日再来～`);
+    $.log(`\n甘露殿【https://t.me/jdredrain】提醒你:没有电脑配件ID，改日再来～`);
     return;
   }
   MD5()
@@ -55,7 +60,7 @@ $.outFlag = 0
       let activityIdArr = activityIdList.split("@");
       for (let j = 0; j < activityIdArr.length; j++) {
       activityId = activityIdArr[j]
-      console.log(`电脑配件ID就位: ${activityId}，准备开始薅豆`);
+      console.log(`\n甘露殿【https://t.me/jdredrain】提醒你:电脑配件ID就位: ${activityId}，准备开始薅豆`);
       await run();
        if($.bean > 0 || message) {
           let msg = `【京东账号${$.index}】${$.nickName || $.UserName}\n${$.bean > 0 && "获得"+$.bean+"京豆\n" || ""}${message}\n`
@@ -69,7 +74,7 @@ $.outFlag = 0
   if(allMessage){
     $.msg($.name, ``, `${allMessage}\n`);
     if ($.isNode()){
-      await notify.sendNotify(`${$.name}`, `${allMessage}\n`);
+      await notify.sendNotify(`${$.name}`, `${allMessage}\n甘露殿【https://t.me/jdredrain】`);
     }
   }
 })()

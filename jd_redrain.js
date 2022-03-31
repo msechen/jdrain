@@ -1,6 +1,12 @@
 /*
 整点京豆雨
-更新时间：2022-1-24
+
+甘露殿-https://t.me/jdredrain
+
+使用前自行设定整点京豆雨环境变量
+export jd_redrain_url="https://gitee.com/msewb/update/raw/master/redrain.json"
+
+更新时间：2022-3-31
 脚本兼容: Quantumult X, Surge, Loon, JSBox, Node.js
 ==============Quantumult X==============
 [task_local]
@@ -97,7 +103,7 @@ if ($.isNode()) {
     }
   }
   if (allMessage) {
-    if ($.isNode()) await notify.sendNotify(`${$.name}`, `${allMessage}`);
+    if ($.isNode()) await notify.sendNotify(`${$.name}`, `${allMessage}\n甘露殿【https://t.me/jdredrain】`);
     $.msg($.name, '', allMessage);
   }
 })()

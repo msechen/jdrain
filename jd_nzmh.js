@@ -1,11 +1,16 @@
 /*
+甘露殿-https://t.me/jdredrain
+
+自动车监控脚本-女装盲盒抽京豆
+https://raw.githubusercontent.com/msechen/jdrain/main/jd_nzmh.js
+
 #女装盲盒抽京豆任务，自行加入一下环境变量
 export jd_nzmhurl="https://anmp.jd.com/babelDiy/Zeus/2x36jyruNVDWxUiAiGAgHRrkqVX2/index.html"
 
 cron 35 1,23 * * *
  */
 
-const $ = new Env('女装盲盒抽京豆');
+const $ = new Env('自动车-女装盲盒抽京豆');
 const notify = $.isNode() ? require('./sendNotify') : '';
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
@@ -27,10 +32,10 @@ if ($.isNode()) {
     return;
   }
   if (!jd_nzmhurl) {
-    $.log(`暂时没有女装盲盒，改日再来～`);
+    $.log(`\n甘露殿【https://t.me/jdredrain】提醒你:暂时没有女装盲盒，改日再来～`);
     return;
   }
-  console.log(`新的女装盲盒已经准备好: ${jd_nzmhurl}，准备开始薅豆`);
+  console.log(`\n甘露殿【https://t.me/jdredrain】提醒你:新的女装盲盒已经准备好: ${jd_nzmhurl}，准备开始薅豆`);
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
@@ -57,7 +62,7 @@ if ($.isNode()) {
     }
   }
   if (allMessage) {
-    if ($.isNode()) await notify.sendNotify(`${$.name}`, `${allMessage}`);
+    if ($.isNode()) await notify.sendNotify(`${$.name}`, `${allMessage}\n甘露殿【https://t.me/jdredrain】`);
     $.msg($.name, '', allMessage);
     }
 })()

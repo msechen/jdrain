@@ -1,23 +1,16 @@
 /*
+甘露殿-https://t.me/jdredrain
 
+自动车监控脚本-组队瓜分京豆
+https://raw.githubusercontent.com/msechen/jdrain/main/jd_zdjr.js
+
+活动地址为：https://cjhydz-isv.isvjcloud.com/wxTeam/activity?activityId=xxxxx
 一共有2个变量
 jd_zdjr_activityId  活动ID 必需
 jd_zdjr_activityUrl 活动地址 必需
 
-已适配docker
 
-需要配合重写获取=>活动id、活动地址
-
-https://\w+-isv.isvjcloud.com/wxTeam/shopInfo url script-request-body jd_zdjr.js
-
-mitm
-*-isv.isvjcloud.com
-[task_local]
-组队瓜分京豆
-40 11 * * * jd_zdjr.js, tag=组队瓜分京豆, enabled=true
-================Loon==============
-[Script]
-cron "40 11 * * *" script-path=jd_zdjr.js,tag=组队瓜分京豆
+即时任务，无需cron
 
 */
 

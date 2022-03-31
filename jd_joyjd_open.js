@@ -1,12 +1,17 @@
 /*
-#jd_joyjd_open通用ID任务，多个活动用@连接，任务连接https://jdjoy.jd.com/module/task/v2/doTask
+甘露殿-https://t.me/jdredrain
+
+自动车监控脚本-jd_joyjd_open通用ID任务
+https://raw.githubusercontent.com/msechen/jdrain/main/jd_joyjd_open.js
+
+jd_joyjd_open通用ID任务，多个活动用@连接
 export comm_activityIDList="af2b3d56e22d43afa0c50622c45ca2a3"  
 export comm_endTimeList="1639756800000"
 export comm_tasknameList="京东工业品抽奖"
 
 即时任务，无需cron,短期或者长期请参考活动规则设置cron
 */
-const $ = new Env('jd_joyjd_open通用ID任务');
+const $ = new Env('自动车-jd_joyjd_open通用ID任务');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 const notify = $.isNode() ? require('./sendNotify') : '';
 let cookiesArr = [];
@@ -38,10 +43,10 @@ if ($.isNode()) {
         return;
     }
     if (!activityIDList) {
-    $.log(`没有通用ID任务，改日再来～`);
+    $.log(`\n甘露殿【https://t.me/jdredrain】提醒你:没有通用ID任务，改日再来～`);
     return;
     }
-    console.log(`通用ID任务就位，准备开始薅豆`);
+    console.log(`\n甘露殿【https://t.me/jdredrain】提醒你:通用ID任务就位，准备开始薅豆`);
     for (let i = 0; i < cookiesArr.length; i++) {
        if (cookiesArr[i]) {
         await getUA();
