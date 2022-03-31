@@ -35,7 +35,7 @@ async def user(event):
         logger.error(f"错误--->{str(e)}")
 
 
-@client.on(events.NewMessage(chats=[-1001728533280, bot_id, myzdjr_chatIds], pattern=r'export\s(computer_activityId|comm_activityIDList|jd_mhurlList|jd_nzmhurl|wish_appIdArrList|jd_redrain_half_url|jd_redrain_url|M_WX_COLLECT_CARD_URL|jd_cjhy_activityId|jd_zdjr_activityId|VENDER_ID|WXGAME_ACT_ID|SHARE_ACTIVITY_ID).*=(".*"|\'.*\')'))
+@client.on(events.NewMessage(chats=[-1001728533280, bot_id, myzdjr_chatIds], pattern=r'export\s(computer_activityId|comm_activityIDList|jd_mhurlList|jd_nzmhurl|wish_appIdArrList|jd_redrain_half_url|jd_redrain_url|M_WX_COLLECT_CARD_URL|jd_cjhy_activityId|jd_zdjr_activityId|VENDER_ID|WXGAME_ACT_ID|SHARE_ACTIVITY_ID|welfare).*=(".*"|\'.*\')'))
 async def activityID(event):
     try:
         text = event.message.text
@@ -65,6 +65,8 @@ async def activityID(event):
             name = "打豆豆游戏"
         elif "SHARE_ACTIVITY_ID" in text:
             name = "分享有礼"
+        elif "welfare" in text:
+            name = "联合关注+加购+分享领豆"
         else:
             return
         msg = await jdbot.send_message(chat_id, f'【监控】 监测到`{name}` 环境变量！')
@@ -124,6 +126,8 @@ async def activityID(event):
                 await cmd('otask /jd/own/raw/jd_doudou.js now')
             elif "SHARE_ACTIVITY_ID" in event.message.text:
                 await cmd('otask /jd/own/raw/jd_share.js now')
+            elif "welfare" in event.message.text:
+                await cmd('otask /jd/own/raw/fav_and_addcart.js now')
             elif "jd_redrain_url" in event.message.text:
                 msg = await jdbot.send_message(chat_id, r'`更换整点雨url完毕\n请定时任务0 0 * * * jtask jd_redrain now')
                 await asyncio.sleep(1)
