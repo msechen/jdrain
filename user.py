@@ -35,7 +35,7 @@ async def user(event):
         logger.error(f"错误--->{str(e)}")
 
 
-@client.on(events.NewMessage(chats=[-1001728533280, bot_id, myzdjr_chatIds], pattern=r'export\s(computer_activityId|comm_activityIDList|jd_mhurlList|jd_nzmhurl|wish_appIdArrList|jd_redrain_half_url|jd_redrain_url|M_WX_COLLECT_CARD_URL|jd_cjhy_activityId|jd_zdjr_activityId|VENDER_ID|WXGAME_ACT_ID|SHARE_ACTIVITY_ID|welfare).*=(".*"|\'.*\')'))
+@client.on(events.NewMessage(chats=myzdjr_chatIds, pattern=r'export\s(computer_activityId|comm_activityIDList|jd_mhurlList|jd_nzmhurl|wish_appIdArrList|jd_redrain_half_url|jd_redrain_url|M_WX_COLLECT_CARD_URL|jd_cjhy_activityId|jd_zdjr_activityId|VENDER_ID|WXGAME_ACT_ID|SHARE_ACTIVITY_ID|welfare).*=(".*"|\'.*\')'))
 async def activityID(event):
     try:
         text = event.message.text
@@ -147,3 +147,71 @@ async def activityID(event):
         tip = '建议百度/谷歌进行查询'
         await jdbot.send_message(chat_id, f"{title}\n\n{name}\n{function}\n错误原因：{str(e)}\n\n{tip}")
         logger.error(f"错误--->{str(e)}")
+
+#bot发送/chart n 查询京豆收入
+@client.on(events.NewMessage(from_users=chat_id, pattern=r"^-b\d*$|^-c\d*$"))
+async def beanchange(event):
+    """
+    京豆收支变化
+    """
+    try:
+        message = event.message.text
+        if re.search(r"\d", message):
+            num = re.findall("\d+", message)[0]
+        else:
+            num = 1
+        if "b" in message:
+            cmdline = f"/bean {num}"
+            beanimg = JD_DIR + '/log/bean.jpg'
+        else:
+            cmdline = f"/chart {num}"
+            beanimg = JD_DIR + '/log/bot/bean.jpeg'
+        if event.chat_id != bot_id:
+            msg = await client.edit_message(event.chat_id, event.message.id, "正在查询，请稍后")
+            await client.send_message(bot_id, cmdline)
+            await asyncio.sleep(7)
+            await client.delete_messages(event.chat_id, msg)
+            await client.send_message(event.chat_id, f'您的账号{num}收支情况', file=beanimg)
+        else:
+            await client.delete_messages(event.chat_id, event.message.id)
+            await client.send_message(bot_id, cmdline)
+    except Exception as e:
+        title = "【💥错误💥】"
+        name = "文件名：" + os.path.split(__file__)[-1].split(".")[0]
+        function = "函数名：" + sys._getframe().f_code.co_name
+        tip = '建议百度/谷歌进行查询'
+        await jdbot.send_message(chat_id, f"{title}\n\n{name}\n{function}\n错误原因：{str(e)}\n\n{tip}")
+        logger.error(f"错误--->{str(e)}")
+
+#回复一个消息，查询群组，频道，消息id
+@client.on(events.NewMessage(pattern=r'^id$', outgoing=True))
+async def check_id(event):
+    message = await event.get_reply_message()
+    text = f"此消息ID：`{str(event.message.id)}`\n\n"
+    text += f"**群组信息**\nid:`{str(event.chat_id)}\n`"
+    msg_from = event.chat if event.chat else (await event.get_chat())
+    if event.is_group or event.is_channel:
+        text += f"群组名称：`{msg_from.title}`\n"
+        try:
+            if msg_from.username:
+                text += f"群组用户名：`@{msg_from.username}`\n"
+        except AttributeError:
+            return
+    if message:
+        text += f"\n**查询的消息**：\n消息id：`{str(message.id)}`\n用户id：`{str(message.sender_id)}`"
+        try:
+            if message.sender.bot:
+                text += f"\n机器人：`是`"
+            if message.sender.last_name:
+                text += f"\n姓：`{message.sender.last_name}`"
+            try:
+                text += f"\n名：`{message.sender.first_name}`"
+            except TypeError:
+                pass
+            if message.sender.username:
+                text += f"\n用户名：@{message.sender.username}"
+        except AttributeError:
+            pass
+        await event.edit(text)
+    else:
+        await event.delete()
