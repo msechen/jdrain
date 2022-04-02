@@ -185,6 +185,7 @@ $.after = async function () {
         `\n加购${$.activityContent?.data?.needCollectionSize}件,${$.activityContent.data.drawInfo?.name
         || ''}\n`);
     $.msg.push($.activityUrl)
+    $.msg.push('\n甘露殿【https://t.me/jdredrain】')
 }
 $.run({whitelist: ['1-5'], wait: [3000, 5000]}).catch(
     reason => $.log(reason));
