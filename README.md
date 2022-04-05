@@ -24,7 +24,7 @@ M_FOLLOW_SHOP_ARGV---M关注有礼---m_jd_follow_shop.js \
 M_WX_LUCK_DRAW_URL---M幸运抽奖---m_jd_wx_luckDraw.js \
 M_WX_ADD_CART_URL---M加购有礼---m_jd_wx_addCart.js
 
-
+提示sign接口异常的自行更换
 
 ==========全新安装上述v4bot+jbot-diy忽略以下步骤==========
 
