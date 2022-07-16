@@ -1,18 +1,9 @@
 /*
-甘露殿-https://t.me/jdredrain
-
-自动车监控脚本-M关注有礼
-https://raw.githubusercontent.com/msechen/jdrain/main/m_jd_follow_shop.js
-
-环境变量
-M_FOLLOW_SHOP_ARGV  活动ID 
-
-即时任务，无需cron
-
-*/
+1 1 1 1 1 1 m_jd_follow_shop.js
+ */
 let mode = __dirname.includes('magic')
 const {Env} = mode ? require('./magic') : require('./magic')
-const $ = new Env('自动车-M关注有礼');
+const $ = new Env('M关注有礼');
 $.followShopArgv = process.env.M_FOLLOW_SHOP_ARGV
     ? process.env.M_FOLLOW_SHOP_ARGV
     : '';
@@ -68,7 +59,7 @@ $.after = async function () {
         $.msg.push($.activityUrl);
     }
 }
-$.run({whitelist: ['1-5'], wait: [1000, 3000]}).catch(reason => $.log(reason))
+$.run({whitelist: ['1-99'], wait: [1000, 3000]}).catch(reason => $.log(reason))
 
 async function drawShopGift() {
     $.log('店铺信息', $.shopId, $.venderId, $.activityId)

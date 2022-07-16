@@ -1,18 +1,13 @@
 /*
-甘露殿-https://t.me/jdredrain
 
-自动车监控脚本-M加购有礼
-https://raw.githubusercontent.com/msechen/jdrain/main/m_jd_wx_addCart.js
-
-环境变量
-M_WX_ADD_CART_URL  活动ID 
-
-即时任务，无需cron
+1 1 1 1 * m_jd_wx_addCart.js, tag=M加购有礼, enabled=true
 
 */
+
+//问题反馈:https://t.me/Wall_E_Channel
 let mode = __dirname.includes('magic')
 const {Env} = mode ? require('./magic') : require('./magic')
-const $ = new Env('自动车-M加购有礼');
+const $ = new Env('M加购有礼');
 $.activityUrl = process.env.M_WX_ADD_CART_URL
     ? process.env.M_WX_ADD_CART_URL
     : '';
@@ -185,7 +180,6 @@ $.after = async function () {
         `\n加购${$.activityContent?.data?.needCollectionSize}件,${$.activityContent.data.drawInfo?.name
         || ''}\n`);
     $.msg.push($.activityUrl)
-    $.msg.push('\n甘露殿【https://t.me/jdredrain】')
 }
-$.run({whitelist: ['1-5'], wait: [3000, 5000]}).catch(
+$.run({whitelist: ['1-99'], wait: [3000, 5000]}).catch(
     reason => $.log(reason));
